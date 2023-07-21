@@ -24,15 +24,21 @@ class BaseModel:
             self.updated_at = datetime.now()
         else:
             try:
-                kwargs["updated_at"] = datetime.strptime(
-                    kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                kwargs["updated_at"] = datetime.fromisoformat(
+                    kwargs["updated_at"]
                 )
-                kwargs["created_at"] = datetime.strptime(
-                    kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                kwargs["created_at"] = datetime.fromisoformat(
+                    kwargs["created_at"]
                 )
                 del kwargs["__class__"]
-            except KeyError:
-                pass
+            except KeyError as e:
+                # If both created_at and created_at are None.
+                if str(e) == "'updated_at'":
+                    self.created_at = datetime.now()
+                    self.updated_at = datetime.now()
+                # If created_at is None.
+                elif str(e) == "'created_at'":
+                    self.created_at = datetime.now()
 
             if ("id" not in kwargs.keys()):
                 self.id = str(uuid.uuid4())

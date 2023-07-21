@@ -84,7 +84,7 @@ class DBStorage(object):
         self.__session.commit()
 
     def delete(self, obj=None):
-        """Deletes obj from the current database session if not node.
+        """Deletes obj from the current database session if not none.
 
         Args:
             obj (object): Object to delete. Defaults to None.
@@ -104,3 +104,7 @@ class DBStorage(object):
         )
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        """Close the session"""
+        self.__session.close()
