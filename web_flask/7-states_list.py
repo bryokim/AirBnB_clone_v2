@@ -24,16 +24,15 @@ def states_list():
     )
 
 
-def close_session(res):
-    """Close the current db session.
+@app.teardown_appcontext
+def close_session(exception):
+    """Close the current db session after a request.
 
     Args:
-        res (obj): Response object.
+        exception (Exception): Exception object.
     """
     storage.close()
 
-
-app.teardown_appcontext(close_session)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
