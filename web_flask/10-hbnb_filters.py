@@ -4,20 +4,22 @@ from flask import Flask, render_template
 
 from models import storage
 from models.state import State
+from models.amenity import Amenity
 
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
-    """Handles the get request for /states_list.
+@app.route("/hbnb_filters", strict_slashes=False)
+def hbnb_filters():
+    """Handles the get request for /hbnb_filters
 
     Returns:
-        str: Return from the render_template method.
+        str: Return from the render_template function.
     """
     return render_template(
-        "7-states_list.html",
-        states=storage.all(State).values()
+        "10-hbnb_filters.html",
+        states=storage.all(State).values(),
+        amenities=storage.all(Amenity).values(),
     )
 
 

@@ -37,7 +37,7 @@ def c(text):
         string: String ti be rendered.
     """
     text = text.replace("_", " ")
-    return f"C {escape(text)}"
+    return "C {}".format(escape(text))
 
 
 @app.route("/python/", strict_slashes=False)
@@ -53,7 +53,7 @@ def python(text="is_cool"):
         string: String ti be rendered.
     """
     text = text.replace("_", " ")
-    return f"Python {escape(text)}"
+    return "Python {}".format(escape(text))
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
@@ -67,7 +67,7 @@ def number(n):
     Returns:
         string: String ti be rendered.
     """
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":

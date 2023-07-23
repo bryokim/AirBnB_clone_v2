@@ -8,15 +8,15 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
-    """Handles the get request for /states_list.
+@app.route("/cities_by_states", strict_slashes=False)
+def cities_by_states():
+    """Handles the get request for /cities_by_states.
 
     Returns:
         str: Return from the render_template method.
     """
     return render_template(
-        "7-states_list.html",
+        "8-cities_by_states.html",
         states=storage.all(State).values()
     )
 
